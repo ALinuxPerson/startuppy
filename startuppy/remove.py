@@ -15,6 +15,10 @@ class UpstartLinuxRemove(StartupRemove):
 
 class SysVInitLinuxRemove(StartupRemove):
     def remove(self, command: str):
+        pass
+
+class LinuxRemove(StartupRemove):
+    def remove(self, command: str):
         init_system: str = utils.init_system()
 
         systemd: SystemDLinuxRemove = SystemDLinuxRemove()
