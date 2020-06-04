@@ -1,11 +1,15 @@
 class StartupAdd:
-    pass
+    def add(self):
+        raise NotImplementedError
 
 class LinuxAdd(StartupAdd):
-    pass
+    def add(self):
+        pass
 
 class MacAdd(StartupAdd):
-    pass
+    def add(self):
+        pass
 
 class WindowsAdd(StartupAdd):
-    pass
+    def add(self):
+        pass

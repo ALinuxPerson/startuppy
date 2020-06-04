@@ -1,11 +1,15 @@
 class StartupRemove:
-    pass
+    def remove(self):
+        raise NotImplementedError
 
 class LinuxRemove(StartupRemove):
-    pass
+    def remove(self):
+        pass
 
 class MacRemove(StartupRemove):
-    pass
+    def remove(self):
+        pass
 
 class WindowsRemove(StartupRemove):
-    pass
+    def remove(self):
+        pass
