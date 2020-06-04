@@ -14,10 +14,6 @@ class SysVInitLinuxAdd(StartupRemove):
     def remove(self, command: str):
         pass
 
-class LinuxRemove(StartupRemove):
-    def remove(self, command: str):
-        pass
-
 class MacRemove(StartupRemove):
     def remove(self, command: str):
         pass
