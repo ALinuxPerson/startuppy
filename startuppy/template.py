@@ -1,4 +1,5 @@
-
+from startuppy.add import StartupAdd
+from startuppy.remove import StartupRemove
 
 class Startup:
     def __init__(self, add: StartupAdd, remove: StartupRemove):
