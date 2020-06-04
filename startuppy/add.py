@@ -1,5 +1,7 @@
 from startuppy import utils
 from typing import *
+import elevate
+import os
 
 class StartupAdd:
     def add(self, command: str):
@@ -7,11 +9,35 @@ class StartupAdd:
 
 class SystemDLinuxAdd(StartupAdd):
     def add(self, command: str):
-        pass
+        import configparser
+
+        config: configparser.ConfigParser = configparser.ConfigParser()
+
+        elevate.elevate(graphical=False)
+
+        config["Unit"] = {
+            "Description": f"{os.path.dirname(command)}: Created by StartupPy"
+        }
+        config["Service"] = {
+            "Type": "simple",
+            "ExecStart": command
+        }
+        config["Install"] = {
+            "WantedBy": "multi-user.target"
+        }
+
+        with open(f"/etc/systemd/system/{os.path.basename(command)}-startuppy.service", "w") as service:
+            config.write(service)
 
 class UpstartLinuxAdd(StartupAdd):
     def add(self, command: str):
-        pass
+        elevate.elevate(graphical=False)
+
+        buffer: str = (f"start on filesystem\n"
+                       f"exec {command}")
+
+        with open(f"/etc/init/{os.path.basename(command)}-startuppy.conf", "w") as script:
+            script.write(buffer)
 
 class SysVInitLinuxAdd(StartupAdd):
     def add(self, command: str):
