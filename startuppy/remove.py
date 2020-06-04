@@ -1,5 +1,6 @@
 from startuppy import utils
 from typing import *
+import elevate
 import os
 
 class StartupRemove:
@@ -10,18 +11,23 @@ class SystemDLinuxRemove(StartupRemove):
     def remove(self, command: str):
         import configparser
 
-        buffer: Dict[str, Dict[str, str]] = {
-            "Unit": {
-                "Description": f"{os.path.dirname(command)}: Created by StartupPy"
-            },
-            "Service": {
-                "Type": "simple",
-                "ExecStart": "command"
-            },
-            "Install": {
-                "WantedBy": "multi-user.target"
-            }
+        config: configparser.ConfigParser = configparser.ConfigParser()
+
+        elevate.elevate(graphical=False)
+
+        config["Unit"] = {
+            "Description": f"{os.path.dirname(command)}: Created by StartupPy"
         }
+        config["Service"] = {
+            "Type": "simple",
+            "ExecStart": command
+        }
+        config["Install"] = {
+            "WantedBy": "multi-user.target"
+        }
+
+        with open(f"/etc/systemd/system/{command}-startuppy.service", "w") as service:
+            config.write(service)
 
 class UpstartLinuxRemove(StartupRemove):
     def remove(self, command: str):
