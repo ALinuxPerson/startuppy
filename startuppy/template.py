@@ -6,4 +6,5 @@ class StartupRemove:
 
 class Startup:
     def __init__(self, add: StartupAdd, remove: StartupRemove):
-        pass
+        self._add: StartupAdd = add
+        self._remove: StartupRemove = remove
