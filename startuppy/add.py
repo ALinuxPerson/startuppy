@@ -2,15 +2,15 @@ class StartupAdd:
     def add(self, command: str):
         raise NotImplementedError
 
-class SystemDLinuxAdd:
+class SystemDLinuxAdd(StartupAdd):
     def add(self, command: str):
         pass
 
-class UpstartLinuxAdd:
+class UpstartLinuxAdd(StartupAdd):
     def add(self, command: str):
         pass
 
-class SysVInitLinuxAdd:
+class SysVInitLinuxAdd(StartupAdd):
     def add(self, command: str):
         pass
 
