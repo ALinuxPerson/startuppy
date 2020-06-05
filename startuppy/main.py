@@ -17,7 +17,7 @@ import os
 class Startup:
     def __init__(self, command: str):
         self.command: str = os.path.abspath(command)
-        if not os.path.exists(self.command):
+        if not os.path.exists(self.command) or not os.path.isfile(self.command) or not self.command:
             raise FileNotFoundError("invalid command")
 
     @property
