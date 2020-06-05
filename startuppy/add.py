@@ -18,6 +18,7 @@ class SystemDLinuxAdd(StartupAdd):
         import configparser
 
         config: configparser.ConfigParser = configparser.ConfigParser()
+        config.optionxform = str  # required because it preserves the cases
 
         elevate.elevate(graphical=False)
 
