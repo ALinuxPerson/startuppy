@@ -48,10 +48,10 @@ class Startup:
         except KeyError:
             raise EnvironmentError("unknown operating system")
 
-    def add(self, command: str):
+    def add(self):
         startup_add: StartupAdd = self._add_choice()
-        return startup_add.add(command)
+        return startup_add.add(self.command)
 
-    def remove(self, command: str):
+    def remove(self):
         startup_remove: StartupRemove = self._remove_choice()
-        return startup_remove.remove(command)
+        return startup_remove.remove(self.command)
