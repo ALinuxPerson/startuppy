@@ -18,6 +18,8 @@ class Startup:
         self.command: str = os.path.abspath(command)
         if not os.path.exists(self.command) or not os.path.isfile(self.command) or not self.command:
             raise FileNotFoundError("invalid command")
+        if platform.system() not in ("Linux", "Windows", "Darwin"):
+            raise EnvironmentError(f"operating system '{platform.system()}' not compatible")
 
     @property
     def _add_choice(self) -> Type[add.StartupAdd]:
