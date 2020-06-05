@@ -14,11 +14,10 @@ from setuptools import find_packages, setup, Command
 from typing import *
 
 # Package meta-data.
-NAME: str = 'mypackage'
-DESCRIPTION: str = 'My short description for my project.'
-URL: str = 'https://github.com/me/myproject'
-EMAIL: str = 'me@example.com'
-AUTHOR: str = 'Awesome Soul'
+NAME: str = 'setuppy'
+DESCRIPTION: str = 'A cross-platform way of adding programs to startup.'
+URL: str = 'https://github.com/ALinuxPerson/startuppy'
+AUTHOR: str = 'ALinuxPerson'
 REQUIRES_PYTHON: str = '>=3.6.0'
 VERSION: str = '0.1.0'
 
@@ -103,7 +102,6 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     author=AUTHOR,
-    author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
