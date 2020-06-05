@@ -36,6 +36,9 @@ class SystemDLinuxAdd(StartupAdd):
             config.write(service)
 
 class UpstartLinuxAdd(StartupAdd):
+    def filename(self, command: str) -> str:
+        return f"{os.path.basename(command)}-startuppy.conf"
+
     def add(self, command: str):
         elevate.elevate(graphical=False)
 
