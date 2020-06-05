@@ -8,25 +8,27 @@ import io
 import os
 import sys
 from shutil import rmtree
+from typing import TextIO
 
 from setuptools import find_packages, setup, Command
+from typing import *
 
 # Package meta-data.
-NAME = 'mypackage'
-DESCRIPTION = 'My short description for my project.'
-URL = 'https://github.com/me/myproject'
-EMAIL = 'me@example.com'
-AUTHOR = 'Awesome Soul'
-REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.0'
+NAME: str = 'mypackage'
+DESCRIPTION: str = 'My short description for my project.'
+URL: str = 'https://github.com/me/myproject'
+EMAIL: str = 'me@example.com'
+AUTHOR: str = 'Awesome Soul'
+REQUIRES_PYTHON: str = '>=3.6.0'
+VERSION: str = '0.1.0'
 
 # What packages are required for this module to be executed?
-REQUIRED = [
-    # 'requests', 'maya', 'records',
+REQUIRED: List[str] = [
+    "elevate"
 ]
 
 # What packages are optional?
-EXTRAS = {
+EXTRAS: Dict[str, List[str]] = {
     # 'fancy feature': ['django'],
 }
 
@@ -35,18 +37,19 @@ EXTRAS = {
 # Except, perhaps the License and Trove Classifiers!
 # If you do change the License, remember to change the Trove Classifier for that!
 
-here = os.path.abspath(os.path.dirname(__file__))
+here: str = os.path.abspath(os.path.dirname(__file__))
 
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
 try:
+    f: IO[Any]
     with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
-        long_description = '\n' + f.read()
+        long_description: str = '\n' + f.read()
 except FileNotFoundError:
-    long_description = DESCRIPTION
+    long_description: str = DESCRIPTION
 
 # Load the package's __version__.py module as a dictionary.
-about = {}
+about: Dict[str, str] = {}
 if not VERSION:
     project_slug = NAME.lower().replace("-", "_").replace(" ", "_")
     with open(os.path.join(here, project_slug, '__version__.py')) as f:
@@ -58,8 +61,8 @@ else:
 class UploadCommand(Command):
     """Support setup.py upload."""
 
-    description = 'Build and publish the package.'
-    user_options = []
+    description: str = 'Build and publish the package.'
+    user_options: List[str] = []
 
     @staticmethod
     def status(s):
@@ -113,16 +116,27 @@ setup(
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
-    license='MIT',
+    license='GNU GPLv3',
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPy'
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "Intended Audience :: End Users/Desktop",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+        "Natural Language :: English",
+        "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows :: Windows 10",
+        "Operating System :: Microsoft :: Windows :: Windows 7",
+        "Operating System :: Microsoft :: Windows :: Windows 8",
+        "Operating System :: Microsoft :: Windows :: Windows 8.1",
+        "Operating System :: POSIX :: Linux",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Topic :: Software Development :: Libraries :: Python Modules"
     ],
     # $ setup.py publish support.
     cmdclass={
