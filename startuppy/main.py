@@ -49,7 +49,9 @@ class Startup:
             raise EnvironmentError("unknown operating system")
 
     def add(self, command: str):
-        pass
+        startup_add: StartupAdd = self._add_choice()
+        return startup_add.add(command)
 
     def remove(self, command: str):
-        pass
+        startup_remove: StartupRemove = self._remove_choice()
+        return startup_remove.remove(command)
