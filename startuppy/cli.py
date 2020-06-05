@@ -1,6 +1,7 @@
 from typing import *
 import argparse
 import platform
+import startuppy
 import sys
 
 parser: argparse.ArgumentParser = argparse.ArgumentParser(description="StartupPy CLI")
@@ -22,13 +23,23 @@ def args(arguments: List[str] = None) -> argparse.Namespace:
     return parser.parse_args(arguments)
 
 def add_remove(command: str):
-    pass
+    try:
+        startup: startuppy.Startup = startuppy.Startup(command)
+    except FileNotFoundError:
+        parser.error(f"command '{args().add or args().remove}' is not found")
+        return
+    except EnvironmentError:
+        parser.error(f"your operating system, '{platform.system()}', is currently not compatible with StartupPy.")
+        return
+
+    try:
+        return startup.remove if args().remove else startup.add()
+    except EnvironmentError:
+        parser.error("linux init system is unknown")
 
 def main():
     arguments: argparse.Namespace = args()
-    current_os: str = platform.system()
-    if current_os not in ("Linux", "Windows", "Darwin"):
-        parser.error(f"your operating system, '{current_os}', is currently not compatible with startup.")
+    add_remove(arguments.add or arguments.remove)  # if add argument not passed, go for the remove argument
 
 
 if __name__ == '__main__':
