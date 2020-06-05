@@ -21,10 +21,7 @@ def args(arguments: List[str] = None) -> argparse.Namespace:
     )
     return parser.parse_args(arguments)
 
-def add():
-    pass
-
-def remove():
+def add_remove(command: str):
     pass
 
 def main():
