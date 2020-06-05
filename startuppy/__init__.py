@@ -32,7 +32,7 @@ class Startup:
         try:
             return switch_case[os_platform]
         except KeyError:
-            raise EnvironmentError("unknown operating system")
+            raise EnvironmentError("unknown operating system") from None
 
     @property
     def _remove_choice(self) -> Type[remove.StartupRemove]:
