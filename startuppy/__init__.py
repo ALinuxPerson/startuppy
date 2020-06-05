@@ -1,10 +1,9 @@
-from startuppy import add, remove, main
+from startuppy import add, remove
 from typing import *
 import platform
-import elevate
 import os
 
-__all__: List[str] = ["add", "remove", "main"]
+__all__: List[str] = ["add", "remove"]
 
 class Startup:
     def __init__(self, command: str):
