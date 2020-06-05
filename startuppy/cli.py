@@ -4,7 +4,10 @@ import platform
 import startuppy
 import sys
 
-parser: argparse.ArgumentParser = argparse.ArgumentParser(description="StartupPy CLI")
+parser: argparse.ArgumentParser = argparse.ArgumentParser(
+    prog="startuppy",
+    description="StartupPy CLI"
+)
 
 def args(arguments: List[str] = None) -> argparse.Namespace:
     if arguments is None:
