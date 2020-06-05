@@ -19,3 +19,16 @@ def args(arguments: List[str] = None) -> argparse.Namespace:
         help="removes a command from startup."
     )
     return parser.parse_args(arguments)
+
+def add():
+    pass
+
+def remove():
+    pass
+
+def main():
+    arguments: argparse.Namespace = args()
+
+
+if __name__ == '__main__':
+    main()
