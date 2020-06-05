@@ -48,7 +48,6 @@ class Main:
         # if add argument not passed, go for the remove argument
         self.add_remove(self.arguments.add or self.arguments.remove)
 
-
-if __name__ == '__main__':
-    main: Main = Main()
-    main.main()
+def main():
+    init_main: Main = Main()
+    init_main.main()
