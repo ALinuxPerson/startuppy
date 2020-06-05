@@ -2,7 +2,7 @@ from startuppy import utils
 from typing import *
 
 class StartupRemove:
-    def filename(self, command: str) -> str:
+    def _filename(self, command: str) -> str:
         raise NotImplementedError
 
     def remove(self, command: str):

@@ -4,14 +4,14 @@ import elevate
 import os
 
 class StartupAdd:
-    def filename(self, command: str) -> str:
+    def _filename(self, command: str) -> str:
         raise NotImplementedError
 
     def add(self, command: str):
         raise NotImplementedError
 
 class SystemDLinuxAdd(StartupAdd):
-    def filename(self, command: str) -> str:
+    def _filename(self, command: str) -> str:
         return f"{os.path.basename(command)}-startuppy.service"
 
     def add(self, command: str):
@@ -32,11 +32,11 @@ class SystemDLinuxAdd(StartupAdd):
             "WantedBy": "multi-user.target"
         }
 
-        with open(f"/etc/systemd/system/{self.filename(command)}", "w") as service:
+        with open(f"/etc/systemd/system/{self._filename(command)}", "w") as service:
             config.write(service)
 
 class UpstartLinuxAdd(StartupAdd):
-    def filename(self, command: str) -> str:
+    def _filename(self, command: str) -> str:
         return f"{os.path.basename(command)}-startuppy.conf"
 
     def add(self, command: str):
@@ -45,7 +45,7 @@ class UpstartLinuxAdd(StartupAdd):
         buffer: str = (f"start on filesystem\n"
                        f"exec {command}")
 
-        with open(f"/etc/init/{self.filename(command)}", "w") as script:
+        with open(f"/etc/init/{self._filename(command)}", "w") as script:
             script.write(buffer)
 
 class SysVInitLinuxAdd(StartupAdd):
