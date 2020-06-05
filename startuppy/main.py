@@ -57,3 +57,6 @@ class Startup:
     def remove(self):
         startup_remove: StartupRemove = self._remove_choice()
         return startup_remove.remove(self.command)
+
+    def __repr__(self):
+        return f"Startup('{self.command}')"
