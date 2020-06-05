@@ -1,4 +1,4 @@
-from startuppy import add, remove, template
+from startuppy import add, remove, main
 from typing import *
 
-__all__: List[str] = ["add", "remove", "template"]
+__all__: List[str] = ["add", "remove", "main"]
