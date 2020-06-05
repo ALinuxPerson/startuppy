@@ -17,6 +17,8 @@ import os
 class Startup:
     def __init__(self, command: str):
         self.command: str = os.path.abspath(command)
+        if not os.path.exists(self.command):
+            raise FileNotFoundError("invalid command")
 
     @property
     def _add_choice(self) -> Type[StartupAdd]:
