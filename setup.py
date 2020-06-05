@@ -8,9 +8,9 @@ import io
 import os
 import sys
 from shutil import rmtree
-from typing import TextIO
 
 from setuptools import find_packages, setup, Command
+from typing.io import *
 from typing import *
 
 # Package meta-data.
