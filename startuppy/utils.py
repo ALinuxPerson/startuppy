@@ -1,5 +1,6 @@
 from typing import *
 import platform
+import sys
 import os
 
 def init_system():
@@ -16,3 +17,6 @@ def init_system():
         if platform.system() != "Linux":
             raise OSError(f"'{platform.system()}' is not Linux")
         raise EnvironmentError("init system is unknown")
+
+def python_in_interactive() -> bool:
+    return hasattr(sys, "ps1")
