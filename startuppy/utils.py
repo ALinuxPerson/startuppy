@@ -1,5 +1,6 @@
 from typing import *
 import platform
+import ctypes
 import sys
 import os
 
@@ -31,3 +32,14 @@ def python_in_interactive() -> bool:
     """
 
     return hasattr(sys, "ps1")
+
+def root() -> bool:
+    """
+    Checks if python is being run as the root user.
+    :return: True if python is being run as root, else False
+    """
+    if platform.system() in ("Linux", "Darwin"):
+        return os.geteuid() == 0
+    if platform == "Windows":
+        return ctypes.windll.shell32.IsUserAnAdmin() == True
+    raise EnvironmentError("unknown operating system")
