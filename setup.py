@@ -14,7 +14,7 @@ from typing.io import *
 from typing import *
 
 # Package meta-data.
-NAME: str = 'setuppy'
+NAME: str = 'startuppy'
 DESCRIPTION: str = 'A cross-platform way of adding programs to startup.'
 URL: str = 'https://github.com/ALinuxPerson/startuppy'
 AUTHOR: str = 'ALinuxPerson'
@@ -108,9 +108,11 @@ setup(
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
-    # entry_points={
-    #     'console_scripts': ['mycli=mymodule:cli'],
-    # },
+    entry_points={
+        "console_scripts": [
+            "startuppy = startuppy.cli:main"
+        ]
+    },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
