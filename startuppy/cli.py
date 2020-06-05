@@ -22,25 +22,30 @@ def args(arguments: List[str] = None) -> argparse.Namespace:
     )
     return parser.parse_args(arguments)
 
-def add_remove(command: str):
-    try:
-        startup: startuppy.Startup = startuppy.Startup(command)
-    except FileNotFoundError:
-        parser.error(f"command '{args().add or args().remove}' is not found")
-        return
-    except EnvironmentError:
-        parser.error(f"your operating system, '{platform.system()}', is currently not compatible with StartupPy.")
-        return
+class Main:
+    def __init__(self):
+        self.arguments: argparse.Namespace = args()
 
-    try:
-        return startup.remove if args().remove else startup.add()
-    except EnvironmentError:
-        parser.error("linux init system is unknown")
+    def add_remove(self, command: str):
+        try:
+            startup: startuppy.Startup = startuppy.Startup(command)
+        except FileNotFoundError:
+            parser.error(f"command '{self.arguments.add or self.arguments.remove}' is not found")
+            return
+        except EnvironmentError:
+            parser.error(f"your operating system, '{platform.system()}', is currently not compatible with StartupPy.")
+            return
 
-def main():
-    arguments: argparse.Namespace = args()
-    add_remove(arguments.add or arguments.remove)  # if add argument not passed, go for the remove argument
+        try:
+            return startup.remove if args().remove else startup.add()
+        except EnvironmentError:
+            parser.error("linux init system is unknown")
+
+    def main(self):
+        # if add argument not passed, go for the remove argument
+        self.add_remove(self.arguments.add or self.arguments.remove)
 
 
 if __name__ == '__main__':
-    main()
+    main: Main = Main()
+    main.main()
