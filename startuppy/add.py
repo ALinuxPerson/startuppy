@@ -49,10 +49,16 @@ class UpstartLinuxAdd(StartupAdd):
             script.write(buffer)
 
 class SysVInitLinuxAdd(StartupAdd):
+    def _filename(self, command: str) -> str:
+        pass
+
     def add(self, command: str):
         pass
 
 class LinuxAdd(StartupAdd):
+    def _filename(self, command: str) -> str:
+        pass
+
     def add(self, command: str):
         init_system: str = utils.init_system()
 
@@ -71,9 +77,15 @@ class LinuxAdd(StartupAdd):
                 func(command)
 
 class MacAdd(StartupAdd):
+    def _filename(self, command: str) -> str:
+        pass
+
     def add(self, command: str):
         pass
 
 class WindowsAdd(StartupAdd):
+    def _filename(self, command: str) -> str:
+        pass
+
     def add(self, command: str):
         pass

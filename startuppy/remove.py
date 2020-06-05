@@ -9,18 +9,30 @@ class StartupRemove:
         raise NotImplementedError
 
 class SystemDLinuxRemove(StartupRemove):
+    def _filename(self, command: str) -> str:
+        pass
+
     def remove(self, command: str):
         pass
 
 class UpstartLinuxRemove(StartupRemove):
+    def _filename(self, command: str) -> str:
+        pass
+
     def remove(self, command: str):
         pass
 
 class SysVInitLinuxRemove(StartupRemove):
+    def _filename(self, command: str) -> str:
+        pass
+
     def remove(self, command: str):
         pass
 
 class LinuxRemove(StartupRemove):
+    def _filename(self, command: str) -> str:
+        pass
+
     def remove(self, command: str):
         init_system: str = utils.init_system()
 
@@ -39,9 +51,15 @@ class LinuxRemove(StartupRemove):
                 func(command)
 
 class MacRemove(StartupRemove):
+    def _filename(self, command: str) -> str:
+        pass
+
     def remove(self, command: str):
         pass
 
 class WindowsRemove(StartupRemove):
+    def _filename(self, command: str) -> str:
+        pass
+
     def remove(self, command: str):
         pass
