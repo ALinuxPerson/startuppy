@@ -4,6 +4,9 @@ import elevate
 import os
 
 class StartupAdd:
+    def filename(self, command: str) -> str:
+        raise NotImplementedError
+
     def add(self, command: str):
         raise NotImplementedError
 
