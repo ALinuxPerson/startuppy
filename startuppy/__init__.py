@@ -1,17 +1,9 @@
 from startuppy import add, remove, utils
 from typing import *
 import platform
-import elevate
 import os
 
 __all__: List[str] = ["add", "remove"]
-
-def _elevate(show_console: bool = True, graphical: bool = True):
-    if utils.python_in_interactive():
-        raise EnvironmentError("please launch python in script mode then try again.")
-    elevate.elevate(show_console=show_console, graphical=graphical)
-
-elevate.elevate = _elevate  # override elevate method
 
 class Startup:
     def __init__(self, command: str):
@@ -19,7 +11,9 @@ class Startup:
         if not os.path.exists(self.command) or not os.path.isfile(self.command) or not self.command:
             raise FileNotFoundError("invalid command")
         if platform.system() not in ("Linux", "Windows", "Darwin"):
-            raise EnvironmentError(f"operating system '{platform.system()}' not compatible")
+            raise SystemError(f"operating system '{platform.system()}' not compatible")
+        if utils.python_in_interactive():
+            raise EnvironmentError("please launch python in script mode then try again.")
 
     @property
     def _add_choice(self) -> Type[add.StartupAdd]:

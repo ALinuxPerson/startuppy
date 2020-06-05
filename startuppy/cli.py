@@ -35,12 +35,16 @@ class Main:
         except FileNotFoundError:
             parser.error(f"command '{self.arguments.add or self.arguments.remove}' is not found")
             return
-        except EnvironmentError:
+        except SystemError:
             parser.error(f"your operating system, '{platform.system()}', is currently not compatible with StartupPy.")
+            return
+        except EnvironmentError:
+            parser.error("run python in script mode, then try again.")
             return
 
         try:
-            return startup.remove if args().remove else startup.add()
+            startup.remove() if self.arguments.remove else startup.add()
+            print(f"success: successfully {'removed' if self.arguments.remove else 'added'} command to startup.")
         except EnvironmentError:
             parser.error("linux init system is unknown")
 
