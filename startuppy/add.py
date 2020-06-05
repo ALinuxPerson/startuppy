@@ -45,7 +45,7 @@ class UpstartLinuxAdd(StartupAdd):
         buffer: str = (f"start on filesystem\n"
                        f"exec {command}")
 
-        with open(f"/etc/init/{os.path.basename(command)}-startuppy.conf", "w") as script:
+        with open(f"/etc/init/{self.filename(command)}", "w") as script:
             script.write(buffer)
 
 class SysVInitLinuxAdd(StartupAdd):
