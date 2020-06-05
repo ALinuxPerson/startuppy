@@ -11,6 +11,9 @@ class StartupAdd:
         raise NotImplementedError
 
 class SystemDLinuxAdd(StartupAdd):
+    def filename(self, command: str) -> str:
+        return f"{os.path.basename(command)}-startuppy.service"
+
     def add(self, command: str):
         import configparser
 
@@ -29,7 +32,7 @@ class SystemDLinuxAdd(StartupAdd):
             "WantedBy": "multi-user.target"
         }
 
-        with open(f"/etc/systemd/system/{os.path.basename(command)}-startuppy.service", "w") as service:
+        with open(f"/etc/systemd/system/{self.filename(command)}", "w") as service:
             config.write(service)
 
 class UpstartLinuxAdd(StartupAdd):
