@@ -1,5 +1,6 @@
 from typing import *
 import argparse
+import platform
 import sys
 
 parser: argparse.ArgumentParser = argparse.ArgumentParser(description="StartupPy CLI")
@@ -28,6 +29,9 @@ def remove():
 
 def main():
     arguments: argparse.Namespace = args()
+    current_os: str = platform.system()
+    if current_os not in ("Linux", "Windows", "Darwin"):
+        parser.error(f"your operating system, '{current_os}', is currently not compatible with startup.")
 
 
 if __name__ == '__main__':
