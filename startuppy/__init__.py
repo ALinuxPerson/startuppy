@@ -1,9 +1,17 @@
-from startuppy import add, remove
+from startuppy import add, remove, utils
 from typing import *
 import platform
+import elevate
 import os
 
 __all__: List[str] = ["add", "remove"]
+
+def _elevate(show_console: bool = True, graphical: bool = True):
+    if utils.python_in_interactive():
+        raise EnvironmentError("please launch python in script mode then try again.")
+    elevate.elevate(show_console=show_console, graphical=graphical)
+
+elevate.elevate = _elevate  # override elevate method
 
 class Startup:
     def __init__(self, command: str):
